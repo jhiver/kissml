@@ -5,7 +5,7 @@ KissML is a little markup language that compiles into HTML and XML. You can also
 
 The goal of KissML is to focus on making well structured, readable documents.
 
-[More sugar please](https://raw.githubusercontent.com/jhiver/kissml/master/examples/capture.png)
+![More sugar please](https://raw.githubusercontent.com/jhiver/kissml/master/examples/capture.png)
 
 Installation
 ------------
