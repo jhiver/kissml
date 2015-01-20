@@ -1,0 +1,8 @@
+html
+    head
+        title : My First KissML document
+    body
+        h1 : KissML
+        p
+            : This is my first KissML document
+            : It's nicely formatted and well structured!

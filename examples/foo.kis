@@ -1,0 +1,9 @@
+body
+ IF results && results.length
+  dl
+   FOR results
+    dt : {{key}}
+    dd : {{val}}
+ ELSE
+  div .alert .alert-info
+   : No results for your search.

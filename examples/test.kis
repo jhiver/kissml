@@ -1,0 +1,42 @@
+html +lang en
+	head
+		meta! +charset utf-8
+		meta! +content width=device-width,initial-scale=1.0 +name viewport
+		meta! +content An HTML preprocessor with beautiful syntax +name description
+		meta! +content KissML, kissml, KISSML, Node, NodeJS, HTML Preprocessor, HTML Syntax +name description
+  	link! @/favicon.ico +rel shortcut icon +type image/x-icon
+  	link! @/stylesheets/application.css +media all +rel stylesheet +type text/css
+		title : KissML
+	body
+		div #myid .row .class +anyOtherAttribute sdlkfgjsd fdskl jgdfklg
+			div .col-sm-12
+				p .lead
+				 : KissML is an extensible HTML preprocessor focusing on readability, compactness, and
+				 : ease of use. Like Python and CoffeeScript, it is using indentation to build its parse
+				 : tree, forcing properly formatted documents. Think of it as LESS or CoffeeScript but
+				 : for HTML and XML.
+		div .row
+			div .col-sm-5
+				h2 : HTML
+				pre
+					: <section class=”container”>
+					:   <h1>Hello</h1>
+					:   <h2>World</h2>
+					:   <div class="content">
+					:     <p>Lorem ipsum dolor sit amet,
+					:     <a href="example.com">consectetur</a>
+					:     adipiscing elit.</p>
+					:   </div>
+			    : </section>
+			div .col-sm-2
+			div .col-sm-5
+				h2 : KissML
+				pre
+					: section .container
+					:   h1: Hello
+					:   h2: World
+					:   div .content
+					:     p
+					:       :: Lorem ipsum dolor sit amet,
+					:       a @@example.com :: consectetur
+					:       :: adipiscing elit.

@@ -1,0 +1,79 @@
+IF showCDRFilters
+  div .panel .panel-default
+    div .panel-heading
+      : Filtering options
+      div .pull-right
+        a +style cursor:pointer; color:black +on-tag hideCDRFilters
+          i .fa .fa-times
+    div .panel-body
+      div .row
+        div .col-md-6 .col-sm-12 +style border-right:1px solid #CCC
+          form .form-horizontal +role form-horizontal
+            div .form-group
+              label .col-sm-2 +control-label!
+                : Search
+              div .col-sm-10
+                input +type text +on-keydown keydown +placeholder
+                  +rel tooltip
+                  +title string to search for
+            div .form-group
+              label .col-sm-2 +control-label!
+                : Direction
+              div .col-sm-10
+                select +value {{direction}}
+                  option +value both     : Both
+                  option +value inbound  : Inbound
+                  option +value outbound : Outbound
+            div .form-group
+              label .col-sm-2 +control-label!
+                : Tag
+              div .col-sm-10
+                input +type text +on-keydown keydown +value {{customTag}} +placeholder
+                  +rel tooltip
+                  +title Custom CDR tag, if any
+            div .form-group
+              label .col-sm-2 +control-label!
+                : Duration
+              div .col-sm-10
+                select +value {{durationOp}}
+                  option +value gt : >=
+                  option +value eq : =
+                  option +value lt : <=
+                input +type text +on-keydown keydown +value {{durationVal}} +placeholder
+                  +rel tooltip
+                  +title number of seconds
+                : sec.
+            div .form-group
+              label .col-sm-2 +control-label!
+                : Cost
+              div .col-sm-10
+                select +value {{costOp}}
+                  option +value gt : >=
+                  option +value eq : =
+                  option +value lt : <=
+                input +type text +on-keydown keydown +value {{costVal}} +placeholder
+                  +rel tooltip
+                  +title units of currency
+        div .col-md-6 .col-sm-12
+          form .form-horizontal +role form-horizontal
+            div .form-group
+              label .col-sm-2 +control-label!
+                : Destination
+              div .col-sm-10
+                select +value {{destinations}} +multiple!
+                  option +value all +selected! : All destinations
+                  FOR destinationList
+                    option +value {{.}} : {{.}}
+            div .form-group
+              label .col-sm-2 +control-label!
+                : Trunk
+              div .col-sm-10
+                select +value {{trunks}} +multiple!
+                  option +value all +selected! : All destinations
+                  FOR trunkList
+                    option +value {{.}} : {{.}}
+            div .form-group
+              div .col-sm-12
+                a .btn .btn-primary .pull-right +on-tap filter
+                  i .fa .fa-filter
+                  : Filter!
