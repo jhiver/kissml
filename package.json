@@ -12,7 +12,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "coffee -o lib/ -c src/ && coffee -c test/*.coffee && mocha"
+    "pretest": "coffee -o lib/ -c src/ && coffee -c test/*.coffee",
+    "test": "mocha",
+    "prepublish": "coffee -o lib/ -c src/ && coffee -c test/*.coffee"
   },
   "repository": {
     "type": "git",
