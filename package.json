@@ -1,6 +1,6 @@
 {
   "name": "kissml",
-  "version": "1.0.0",
+  "version": "0.9.0",
   "description": "HTML/XML preprocessor - think LESS for HTML!",
   "main": "./lib/kissml.js",
   "bin": {
