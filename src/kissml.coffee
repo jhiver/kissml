@@ -19,13 +19,13 @@ TreeNode = -> return treenode.Create()
 
 smack = (string, opts) ->
 	opts or= {}
-	tokenizer = opts.tokenizer or Tokenizer()
-	printer   = opts.printer   or Printer()
-	parser    = opts.parser    or Parser()
+	theTokenizer = opts.tokenizer or Tokenizer()
+	thePrinter = opts.printer   or Printer()
+	theParser = opts.parser    or Parser()
 
-	token  = tokenizer.frack string
-	tree   = parser.organize token
-	result = printer.walk tree
+	token  = theTokenizer.frack string
+	tree   = theParser.organize token
+	result = thePrinter.walk tree
 
 	return result
 

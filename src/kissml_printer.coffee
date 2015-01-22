@@ -37,7 +37,9 @@ Create = ->
 
 	# pretty print start
 	self.startPrettyPrintIndent = (node) ->
-		if node.parent
+		if node.parent and node.parent.tag is TYPE.ROOT and node.parent.children[0] isnt node
+			string = "\n"			
+		else if node.parent and node.parent.tag isnt TYPE.ROOT
 			string = "\n"
 			depth = node.depth()
 			while depth > 0
@@ -194,13 +196,13 @@ Create = ->
 
 	self.walk = (node) ->
 		res = []
-
-		_.each self.extensions, (extend) -> extend node
-		res.push self.start node
-		res.push self.text node
+		if node.tag isnt TYPE.ROOT
+			_.each self.extensions, (extend) -> extend node
+			res.push self.start node
+			res.push self.text node
 		_.each node.children, (child) -> res.push self.walk child
-		res.push self.stop node
-
+		if node.tag isnt TYPE.ROOT
+			res.push self.stop node
 		return res.join ''
 
 	return self

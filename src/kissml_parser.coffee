@@ -18,9 +18,14 @@ Handle_Newline = (current, token) ->
 # accordingly, and return next token
 Handle_Indent = (current, token) ->
 	return [current, null] unless token.next
-	return [current, null] unless token.data.match /^\s+$/
 	return [current, null] unless token.prev.type is 'newline'
-	indent = token.data.length
+	if token.data.match /^\s+$/
+		indent = token.data.length
+	else
+		indent = 0
+
+	# return [current, null] unless token.data.match /^\s+$/
+	# indent = token.data.length
 
 	# if indent is less than current indent, then we should
 	# fall back to a suitable parent node.
@@ -36,7 +41,12 @@ Handle_Indent = (current, token) ->
 	current = current.addChild()
 	current.indent = indent
 
-	return [ current, token.next ]
+
+	if indent > 0
+		return [ current, token.next ]
+
+	else
+		return [ current, token, true ]
 
 
 Handle_TextSwitch = (current, token) ->
@@ -144,14 +154,18 @@ Create = ->
 	self.handlers = []
 
 	self.organize = (token, current) ->
-		current or= TreeNode.Create()
+		if not current
+			current = TreeNode.Create()
+			current.tag = TYPE.ROOT
+			current = current.addChild()
+			current.indent = 0
 		while token and token isnt 'END'
 			for handler in self.handlers
-				[newCurrent, newToken] = handler.func current, token
+				[newCurrent, newToken, mustContinue] = handler.func current, token
 				if newToken
 					current = newCurrent
 					token = newToken
-					break
+					break unless mustContinue
 		return current.root()
 
 

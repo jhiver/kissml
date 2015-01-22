@@ -1,12 +1,12 @@
 _ = require 'underscore'
-CONST = require './kissml_constants'
+TYPE = require './kissml_constants'
 
 
 Create = (opts) ->
 	self =
 		indent: 0
 		attributes: {}
-		tag: CONST.NONE
+		tag: TYPE.NONE
 		children: []
 		text: []
 		state: 'default'
@@ -58,6 +58,7 @@ Create = (opts) ->
 		return self.parent.root()
 
 	self.depth = ->
+		return 0 if self.parent and self.parent.tag is TYPE.ROOT
 		return 0 unless self.parent
 		return 1 + self.parent.depth()
 

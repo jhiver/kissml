@@ -3,3 +3,4 @@ module.exports =
 	TEXT: 1
 	COMMENT: 2
 	RAW: 3
+	ROOT: 4
