@@ -18,6 +18,7 @@ clean:
 	rm test/*.js
 
 test:
+	npm install
 	mkdir -p lib
 	rm -rf lib
 	mkdir -p lib

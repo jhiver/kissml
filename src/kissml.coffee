@@ -13,7 +13,7 @@ Printer = -> return printer.Create()
 
 Tokenizer = -> return tokenizer.Create()
 
-Constants = -> return constants.Create()
+Constants = -> return constants
 
 TreeNode = -> return treenode.Create()
 
