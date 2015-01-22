@@ -1,13 +1,12 @@
 {
   "name": "kissml",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "description": "HTML/XML preprocessor - think LESS for HTML!",
   "main": "./lib/kissml.js",
   "bin": {
     "kissml": "./bin/kissml",
     "kissml-ractive": "./bin/kissml-ractive"
   },
-  "preferGlobal": true,
   "directories": {
     "test": "test"
   },

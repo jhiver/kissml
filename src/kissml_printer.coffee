@@ -9,6 +9,7 @@ Create = ->
 	self.startHandle = []
 	self.textHandles = []
 	self.stopHandles = []
+
 	
 	self.encodeString = (str) ->
 		String(str)
@@ -61,6 +62,7 @@ Create = ->
 		self.LeadingWhitespaceNeeded = null
 		return string
 
+
 	# Void element TML tag, i.e <br>
 	self.startVoidElementTag = (node, string) ->
 		nodeTag = node.tag.replace /\!$/, ''
@@ -71,6 +73,7 @@ Create = ->
 		string += ">"
 		self.LeadingWhitespaceNeeded = null
 		return string
+
 
 	# Normal tag
 	self.startNormalTag = (node, string) ->
