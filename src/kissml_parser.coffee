@@ -122,7 +122,7 @@ Handle_AttributeValue = (current, token) ->
 	return [current, token.next]
 
 
-Handle_Tag = (current, token) ->
+Handle_Default = (current, token) ->
 	if current.tag
 		current = current.addChild()
 	current.tag = token.data
@@ -156,17 +156,33 @@ Create = ->
 
 
 	self.extend = (opts) ->
-		if opts.after
-			newHandlerList = []
-			_.each self.handlers, (item) ->
-				newHandlerList.push item
-				if item.name is opts.after
-					newHandlerList.push opts
-			self.handlers = newHandlerList
+		if _.isFunction opts
+			[head..., tail] = self.handlers
+			self.handlers = [head..., {name: '_', func: opts}, tail]
 		else
-			self.handlers.push opts
+			inserted = false
 
+			if opts.after
+				newHandlerList = []
+				_.each self.handlers, (item) ->
+					newHandlerList.push item
+					if item.name is opts.after
+						newHandlerList.push opts
+						inserted = true
+				self.handlers = newHandlerList
 
+			else if opts.before
+				newHandlerList = []
+				_.each self.handlers, (item) ->
+					if item.name is opts.before
+						newHandlerList.push opts
+						inserted = true
+					newHandlerList.push item
+				self.handlers = newHandlerList
+
+			if not inserted
+				self.handlers.push opts
+	
 	self.extend name: 'Handle_END', func: Handle_END
 	self.extend name: 'Handle_Newline', func: Handle_Newline
 	self.extend name: 'Handle_Indent', func: Handle_Indent
@@ -180,7 +196,7 @@ Create = ->
 	self.extend name: 'Handle_AttributeName', func: Handle_AttributeName
 	self.extend name: 'Handle_Space', func: Handle_Space
 	self.extend name: 'Handle_AttributeValue', func: Handle_AttributeValue
-	self.extend name: 'Handle_Tag', func: Handle_Tag
+	self.extend name: 'Handle_Default', func: Handle_Default
 
 	return self
 

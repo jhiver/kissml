@@ -31,6 +31,8 @@ smack = (string, opts) ->
 
 run = ->
 	string = fs.readFileSync process.argv.pop(), encoding: 'utf8'
+	string = string.replace /\r\n/g, "\n"
+	string = string.replace /\n\r/g, "\n"
 	console.log smack string
 
 module.exports =

@@ -6,20 +6,21 @@ init:
 	npm install
 
 build:
-	rm lib/*
-	rmdir lib
-	mkdir lib
+	mkdir -p lib
+	rm -rf lib
+	mkdir -p lib
 	coffee -o lib/ -c src/
 
 clean:
-	rm lib/*
-	rmdir lib
+	mkdir -p lib
+	rm -rf lib
+	mkdir -p lib
 	rm test/*.js
 
 test:
-	rm lib/*
-	rmdir lib
-	mkdir lib
+	mkdir -p lib
+	rm -rf lib
+	mkdir -p lib
 	coffee -o lib/ -c src/
 	coffee -c test/*.coffee
 	mocha

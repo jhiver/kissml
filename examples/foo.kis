@@ -7,3 +7,5 @@ body
  ELSE
   div .alert .alert-info
    : No results for your search.
+ RASH foo && bar
+  p .lead : Testing one two

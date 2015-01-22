@@ -5,11 +5,11 @@ TYPE = require './kissml_constants'
 Create = ->
 	self = {}
 	self.LeadingWhitespaceNeeded = null
-
+	
 	self.startHandle = []
 	self.textHandles = []
 	self.stopHandles = []
-
+	
 	self.encodeString = (str) ->
 		String(str)
 			.replace(/^\#\#/, '#')
@@ -32,6 +32,7 @@ Create = ->
 			.replace(/'/g, '&#39;')
 			.replace(/</g, '&lt;')
 			.replace(/>/g, '&gt;')
+			.replace(/__NBSP__/g, '&nbsp;') # surely, a little hack can't hurt once in a while?
 
 
 	# pretty print start
@@ -82,8 +83,7 @@ Create = ->
 
 	self.start = (node) ->
 		if node.type is TYPE.RAW
-			console.log node
-			return node.start or ''
+			return if node.start then self.startPrettyPrintIndent(node) + node.start else ''
 
 		return '' unless node.tag
 		return '' if node.tag is TYPE.TEXT
@@ -145,6 +145,8 @@ Create = ->
 	self.stopPrettyPrintIndent = (node) ->
 		if node.children[0] and node.children[0].tag is TYPE.TEXT
 			string = ''
+		else if node.children and node.children.length is 0
+			string = ''
 		else
 			string = "\n"
 			depth = node.depth()
@@ -156,7 +158,7 @@ Create = ->
 
 	self.stop = (node) ->
 		if node.type is TYPE.RAW
-			return node.stop or ''
+			return if node.stop then self.stopPrettyPrintIndent(node) + node.stop else ''
 
 		return '' unless node.tag
 		return '' if node.tag is TYPE.TEXT
