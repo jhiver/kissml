@@ -80,7 +80,12 @@ Create = ->
 		string += ' ' if self.LeadingWhitespaceNeeded and self.LeadingWhitespaceNeeded.tag and self.LeadingWhitespaceNeeded.tag is TYPE.TEXT
 		string += '<'
 		string += node.tag
-		_.each node.attributes, (v, k) -> string += " #{k}=\"#{self.encodeString v.join(' ')}\""
+		_.each node.attributes, (v, k) ->
+			if k.match /\!$/
+				k = k.replace /\!$/, ''
+				string += " " + k
+			else
+				string += " #{k}=\"#{self.encodeString v.join(' ')}\""
 		string += ">"
 		self.LeadingWhitespaceNeeded = null
 		return string
