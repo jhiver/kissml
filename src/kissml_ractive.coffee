@@ -98,7 +98,7 @@ Handle_ELSE = (current, token) ->
 		current.stop  = previousSibling.stop
 		current.text  = previousSibling.text
 	else
-		current.start = '{{#else}}'
+		current.start = '{{else}}'
 		parent.delChild current
 		previousSibling.addChild current
 		current.depth = ->
@@ -215,11 +215,24 @@ run = ->
 	string = string.replace /\n\r/g, "\n"
 	console.log smack string
 
+
+extend = (pieces) ->
+	p = pieces.parser
+	p.extend Handle_IF
+	p.extend Handle_UNLESS
+	p.extend Handle_FOR
+	p.extend Handle_ELSE
+	p.extend Handle_RASH
+	p.extend Handle_VAR
+	p.extend Handle_INCLUDE
+
+
 module.exports =
 	Parser: Parser
 	Printer: Printer
 	Tokenizer: Tokenizer
 	Constants: Constants
 	TreeNode: TreeNode
+	extend: extend
 	smack: smack
 	run: run
